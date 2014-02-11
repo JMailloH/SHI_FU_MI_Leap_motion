@@ -1,5 +1,5 @@
-﻿Compilación iniciada a las 27/01/2014 18:27:25.
-     1>Proyecto "C:\Users\Maria\Desktop\NPI.Leap Motion\LeapDeveloperKit_release_win_1.0.9+8391\LeapDeveloperKit\LeapSDK\samples\SampleVS2010.vcxproj" en el nodo 2 (build destinos).
+﻿Compilación iniciada a las 11/02/2014 12:54:35.
+     1>Proyecto "C:\Users\David\Desktop\LeapSDK\samples\SampleVS2010.vcxproj" en el nodo 2 (build destinos).
      1>InitializeBuildStatus:
          Se creará "Debug\SampleVS2010.unsuccessfulbuild" porque se especificó "AlwaysCreate".
        GenerateTargetFrameworkMonikerAttribute:
@@ -7,26 +7,28 @@
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\include /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt interfaz.cpp /clr:nostdlib 
          interfaz.cpp
-     1>interfaz.cpp(132): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(array<System::String^>^ argv)'
+     1>interfaz.cpp(31): warning C4305: '=' : truncamiento de '__int64' a 'long'
+     1>interfaz.cpp(31): warning C4309: '=' : truncamiento de valor constante
+     1>interfaz.cpp(121): warning C4829: Parámetros posiblemente incorrectos para la función main. Utilice 'int main(array<System::String^>^ argv)'
          Todas las salidas están actualizadas.
        CoreResGen:
-         Todas las salidas están actualizadas.
+         No hay ningún recurso obsoleto con respecto a sus archivos de origen. Se omitirá la generación de recursos.
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Maria\Desktop\NPI.Leap Motion\LeapDeveloperKit_release_win_1.0.9+8391\LeapDeveloperKit\LeapSDK\samples\Debug\Sample.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\lib\x86 Leapd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /ASSEMBLYRESOURCE:Debug\Sample.interfaz.resources /MANIFEST /ManifestFile:"Debug\Sample.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Maria\Desktop\NPI.Leap Motion\LeapDeveloperKit_release_win_1.0.9+8391\LeapDeveloperKit\LeapSDK\samples\Debug\Sample.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\interfaz.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\David\Desktop\LeapSDK\samples\Debug\Sample.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\lib\x86 Leapd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /ASSEMBLYRESOURCE:Debug\Sample.interfaz.resources /MANIFEST /ManifestFile:"Debug\Sample.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\David\Desktop\LeapSDK\samples\Debug\Sample.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Debug\interfaz.obj
          "Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
-         SampleVS2010.vcxproj -> C:\Users\Maria\Desktop\NPI.Leap Motion\LeapDeveloperKit_release_win_1.0.9+8391\LeapDeveloperKit\LeapSDK\samples\Debug\Sample.exe
+         SampleVS2010.vcxproj -> C:\Users\David\Desktop\LeapSDK\samples\Debug\Sample.exe
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\Maria\Desktop\NPI.Leap Motion\LeapDeveloperKit_release_win_1.0.9+8391\LeapDeveloperKit\LeapSDK\samples\Debug\Sample.exe;#1" /manifest Debug\Sample.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\David\Desktop\LeapSDK\samples\Debug\Sample.exe;#1" /manifest Debug\Sample.exe.intermediate.manifest
        PostBuildEvent:
          Description: Copy required DLLs
-         copy ..\lib\x86\Leapd.dll "C:\Users\Maria\Desktop\NPI.Leap Motion\LeapDeveloperKit_release_win_1.0.9+8391\LeapDeveloperKit\LeapSDK\samples\Debug\"
+         copy ..\lib\x86\Leapd.dll "C:\Users\David\Desktop\LeapSDK\samples\Debug\"
          :VCEnd
                  1 archivo(s) copiado(s).
        FinalizeBuildStatus:
          Se eliminará el archivo "Debug\SampleVS2010.unsuccessfulbuild".
          Aplicando tarea Touch a "Debug\SampleVS2010.lastbuildstate".
-     1>Compilación del proyecto terminada "C:\Users\Maria\Desktop\NPI.Leap Motion\LeapDeveloperKit_release_win_1.0.9+8391\LeapDeveloperKit\LeapSDK\samples\SampleVS2010.vcxproj" (build destinos).
+     1>Compilación del proyecto terminada "C:\Users\David\Desktop\LeapSDK\samples\SampleVS2010.vcxproj" (build destinos).
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:06.14
+Tiempo transcurrido 00:00:01.55

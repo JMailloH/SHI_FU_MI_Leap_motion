@@ -11,7 +11,6 @@
 #include "Leap.h"
 using namespace Leap;
 
-
 class SampleListener : public Listener {
   public:
     virtual void onInit(const Controller&);
@@ -21,110 +20,94 @@ class SampleListener : public Listener {
     virtual void onFrame(const Controller&);
     virtual void onFocusGained(const Controller&);
     virtual void onFocusLost(const Controller&);
+private:
+	long int delay;
+	long int Tmuestra;
 };
 
 void SampleListener::onInit(const Controller& controller) {
   std::cout << "Initialized" << std::endl;
+  delay = 500000000000;
+  Tmuestra = 0;
 }
 
 
 void SampleListener::onConnect(const Controller& controller) {
-  std::cout << "Connected" << std::endl;
-/*  controller.enableGesture(Gesture::TYPE_CIRCLE);
-  controller.enableGesture(Gesture::TYPE_KEY_TAP);
-  controller.enableGesture(Gesture::TYPE_SCREEN_TAP);
-  controller.enableGesture(Gesture::TYPE_SWIPE);
-*/  
+  std::cerr << "Connected" << std::endl;
 }
 
 void SampleListener::onDisconnect(const Controller& controller) {
   //Note: not dispatched when running in a debugger.
-  std::cout << "Disconnected" << std::endl;
+  std::cerr << "Disconnected" << std::endl;
 }
 
 void SampleListener::onExit(const Controller& controller) {
-  std::cout << "Exited" << std::endl;
+  std::cerr << "Exited" << std::endl;
 }
 
 void SampleListener::onFrame(const Controller& controller) {
-  // Get the most recent frame and report some basic information
-  const Frame frame = controller.frame();
-  		
-  /*std::cout << "Frame id: " << frame.id()
-            << ", timestamp: " << frame.timestamp()
-            << ", hands: " << frame.hands().count()
-            << ", fingers: " << frame.fingers().count()
-            << ", tools: " << frame.tools().count()
-            << ", gestures: " << frame.gestures().count() << std::endl;
-	*/
+   // Get the most recent frame and report some basic information
+   const Frame frame = controller.frame();
+   
+   // No reconocemos si es piedra papel o tijera hasta que no se encuentren las dos manos dentro
+   if (frame.hands().count() == 2) {
+    Hand hand1 = frame.hands()[0];
+	Hand hand2 = frame.hands()[1];
 
-   // ************************************************************* //
-   // ******************* DETECCIÓN DE GESTOS ********************* //
-   // ************************************************************* //
-
-   if (!frame.hands().isEmpty()) {
-    // Get the first hand
-    const Hand hand1 = frame.hands()[0];
-
-	// CUATRO DEDOS
-	if(hand1.fingers().count() == 1){
-		listo1 = true;
+	Leap::Vector position = hand1.palmPosition();
+	
+	// Asignamos el jugador 1 (hand1) a la mano que esté situada a la izquierda
+	// y a la que esté situada a la derecha le asignamos el jugador 2
+	if (position[0] >= 0){
+		hand1 = frame.hands()[1];
+		hand2 = frame.hands()[0];
 	}
-
+	
+	// Comprobamos que se de un cierto delay entre los frames
+	if((frame.timestamp() - Tmuestra) < delay) return;
+	Tmuestra = frame.timestamp();
+	
 	// PIEDRA --> MANO CERRADA 
 	if(hand1.fingers().isEmpty()){
-	  piedra1 = true; 
+	  jug1_piedra = true; 
 	}
+
 	// TIJERAS --> DOS DEDOS
 	if(hand1.fingers().count() == 2){
-	  tijeras1 = true; 
+	  jug1_tijeras = true; 
 	}
+
 	// PAPEL --> MANO ABIERTA
 	if(hand1.fingers().count() == 5){
-	  papel1 = true;
+	  jug1_papel = true;
 	}
-	
-	
-	if (frame.hands().count() == 2){
-      const Hand hand2 = frame.hands()[1];
 	  
-	  // CUATRO DEDOS
-	  if(hand2.fingers().count() == 1){
-		 listo2 = true;
-	  }
-	  
-	  
-	  // PIEDRA --> MANO CERRADA
-	  if(hand2.fingers().isEmpty()){
-	     piedra2 = true; 
-	  }
+	// PIEDRA --> MANO CERRADA
+	if(hand2.fingers().isEmpty()){
+	   jug2_piedra = true; 
+	}
 
-	  // TIJERAS --> DOS DEDOS
-	  if(hand2.fingers().count() == 2){
-		 tijeras2 = true;
-	  }
+	// TIJERAS --> DOS DEDOS
+	if(hand2.fingers().count() == 2){
+		jug2_tijeras = true;
+	}
 
-	  // PAPEL --> MANO ABIERTA
-	  if(hand2.fingers().count() == 5){
-		  papel2 = true;
-	  }
-	}   
+	// PAPEL --> MANO ABIERTA
+	if(hand2.fingers().count() == 5){
+	  jug2_papel = true;
+	}  
+	jugadores_listos = true;
 
    }
 }
 
 void SampleListener::onFocusGained(const Controller& controller) {
-  std::cout << "Focus Gained" << std::endl;
+  std::cerr << "Focus Gained" << std::endl;
 }
 
 void SampleListener::onFocusLost(const Controller& controller) {
-  std::cout << "Focus Lost" << std::endl;
+  std::cerr << "Focus Lost" << std::endl;
 }
-
-
-
-
-
 
 using namespace System;
 using namespace System ::Windows::Forms;
@@ -140,8 +123,8 @@ void main(array<String^>^ arg) {
    Controller controller;
 
    // Keep this process running until Enter is pressed
-   std::cout << "Press Enter to quit..." << std::endl;
-   std::cin.get();
+   std::cerr << "Press Enter to quit..." << std::endl;
+//   std::cin.get();
 
    // Have the sample listener receive events from the controller
    controller.addListener(listener);

@@ -5,14 +5,13 @@
 // Variables para la gestión de la interfaz
  bool listo1 = false;
  bool listo2 = false;
- bool ppt1 = false;
- bool ppt2 = false;
- bool papel1 = false;
- bool piedra1 = false;
- bool tijeras1 = false;
- bool papel2 = false;
- bool piedra2 = false;
- bool tijeras2 = false;
+ bool jugadores_listos = false;
+ bool jug1_papel = false;
+ bool jug1_piedra = false;
+ bool jug1_tijeras = false;
+ bool jug2_papel = false;
+ bool jug2_piedra = false;
+ bool jug2_tijeras = false;
  int contador1 = 0;
  int contador2 = 0;
 
@@ -63,10 +62,6 @@ namespace Sample {
 	private: System::Windows::Forms::Label^  jugador2;
 	private: System::Windows::Forms::Label^  espacio_reglas;
 	private: System::Windows::Forms::Label^  titulo;
-
-
-
-
 
 	protected: 
 
@@ -264,117 +259,103 @@ namespace Sample {
 #pragma endregion
 
 	private: System::Void jugar_Click(System::Object^  sender, System::EventArgs^  e) {
-				 listo1 = false;
-				 listo2 = false;
-				 espacio_reglas->Text="Jugador 1: Introduce la mano con un dedo";
-				 espacio_reglas->Refresh();
-				 // Se comprueba si el jugador uno esta listo
-				 while(!listo1){
-					// Mientras que el jugador 1 no este listo se queda escuchando
-				 }
-				 espacio_reglas->Text="Jugador 2: Introduce la mano con un dedo";
-				 espacio_reglas->Refresh();
-				 // Se comprueba si el jugador dos esta listo
-				 while(!listo2){
-					 // Mientras que el jugador 2 no este listo se queda escuchando
-
-				 }
+				 //Inicializamos las variables booleanas a false en cada ronda
+				 jugadores_listos = false;
+				 jug1_papel = false;
+				 jug1_piedra = false;
+				 jug1_tijeras = false;
+				 jug2_papel = false;
+				 jug2_piedra = false;
+				 jug2_tijeras = false;
+	
+				 //Actualizamos el mensaje de realimentación para el usuario
 				 espacio_reglas->Text="Contad hasta tres y elegid piedra, papel o tijera";
 				 espacio_reglas->Refresh();
+
 				 // Reconoce jugador 1 y jugador 2
-				 std::string str1;
-				 std::string str2;
-				 ppt1 = false;
-				 ppt2 = false;
-				 papel1 = false;
-				 piedra1 = false;
-				 tijeras1 = false;
-				 papel2 = false;
-				 piedra2 = false;
-				 tijeras2 = false;
-				 while(!ppt1){
-					if(piedra1){
-						ppt1 = true;
-						str1 = "imagenes/piedra.jpg";
-					}else if (papel1){
-						ppt1 = true;
-						str1 = "imagenes/papel.jpg";
-					}else if (tijeras1){
-						ppt1 = true;
-						str1 = "imagenes/tijeras.jpg";
-					}
+				 std::string jug1_imagen ="imagenes/blanco.jpg";
+				 std::string jug2_imagen = "imagenes/blanco.jpg";
 
-				 }
-
-				 ppt2 = false;
-				 papel1 = false;
-				 piedra1 = false;
-				 tijeras1 = false;
-				 papel2 = false;
-				 piedra2 = false;
-				 tijeras2 = false;
-				 while(!ppt2){					 
-					if(piedra2){
-						ppt2 = true;
-						str2 = "imagenes/piedra.jpg";
-					}else if (papel2){
-						ppt2 = true;
-						str2 = "imagenes/papel.jpg";
-					}else if (tijeras2){
-						ppt2 = true;
-						str2 = "imagenes/tijeras.jpg";
-					}
-
-				 }
-
-				 System::String^ str3 = gcnew System::String(str1.c_str(), 0, str1.length());
-				 imagen_jugador1->Load(str3);
+				 System::String^ jug1_imagen_system = gcnew System::String(jug1_imagen.c_str(), 0, jug1_imagen.length());
+				 imagen_jugador1->Load(jug1_imagen_system);
 				 imagen_jugador1->Refresh();
-				 System::String^ str4 = gcnew System::String(str2.c_str(), 0, str2.length());
-				 imagen_jugador2->Load(str4);
+				 System::String^ jug2_imagen_system = gcnew System::String(jug2_imagen.c_str(), 0, jug2_imagen.length());
+				 imagen_jugador2->Load(jug2_imagen_system);
+				 imagen_jugador2->Refresh();
+
+				 jugadores_listos = false;
+
+				 while(!jugadores_listos){
+					if(jug1_piedra){
+						jug1_imagen = "imagenes/piedra.jpg";
+					}else if (jug1_papel){
+						jug1_imagen = "imagenes/papel.jpg";
+					}else if (jug1_tijeras){
+						jug1_imagen = "imagenes/tijeras.jpg";
+					}
+					if(jug2_piedra){
+						jug2_imagen = "imagenes/piedra.jpg";
+					}else if (jug2_papel){
+						jug2_imagen = "imagenes/papel.jpg";
+					}else if (jug2_tijeras){
+						jug2_imagen = "imagenes/tijeras.jpg";
+					}
+
+				 }
+
+				 jug1_imagen_system = gcnew System::String(jug1_imagen.c_str(), 0, jug1_imagen.length());
+				 imagen_jugador1->Load(jug1_imagen_system);
+				 imagen_jugador1->Refresh();
+				 jug2_imagen_system = gcnew System::String(jug2_imagen.c_str(), 0, jug2_imagen.length());
+				 imagen_jugador2->Load(jug2_imagen_system);
 				 imagen_jugador2->Refresh();
 				 
-				 // Vemos quien ha ganado y aumentamos el contador
-				 if(str1 == "imagenes/piedra.jpg"){
-					 if(str2 == "imagenes/tijeras.jpg")
+				 // Vemos quien ha ganado y sumamos uno a su puntuación
+				 if(jug1_piedra){
+					 if(jug2_tijeras)
 						 contador1++;
-					 else if(str2 == "imagenes/papel.jpg")
+					 else if(jug2_papel)
 						 contador2++;
 					
-				 }else if (str1 == "imagenes/tijeras.jpg"){
-					 if(str2 == "imagenes/piedra.jpg")
+				 }else if (jug1_tijeras){
+					 if(jug2_piedra)
 						 contador2++;
-					 else if(str2 == "imagenes/papel.jpg")
+					 else if(jug2_papel)
 						 contador1++;
 			
-				 }else{
-					 if(str2 == "imagenes/piedra.jpg")
+				 }else if (jug1_papel){
+					 if(jug2_piedra)
 						 contador1++;
-					 else if(str2 == "imagenes/tijeras.jpg")
+					 else if(jug2_tijeras)
 						 contador2++;
 		
 				 }
-				 
+
+				 // Pasamos el contador de tipo entero a tipo System::String para poderlo actualizar en su
+				 // respectiva label
 				 std::string s;
 				 std::stringstream out1;
 				 out1 << contador1;
-				 System::String^ str5 = gcnew System::String(out1.str().c_str(), 0, out1.str().length());
-				 contador_jugador1->Text = str5;
+				 System::String^ jug1_cont = gcnew System::String(out1.str().c_str(), 0, out1.str().length());
+				 contador_jugador1->Text = jug1_cont;
 				 std::stringstream out2;
 				 out2 << contador2;
-				 System::String^ str6 = gcnew System::String(out2.str().c_str(), 0, out2.str().length());
-				 contador_jugador2->Text = str6;
+				 System::String^ jug2_cont = gcnew System::String(out2.str().c_str(), 0, out2.str().length());
+				 contador_jugador2->Text = jug2_cont;
+
+				 espacio_reglas->Text="¡Juega otra vez!";
+				 espacio_reglas->Refresh();
 
 			 }
 	private: System::Void terminar_juego_Click(System::Object^  sender, System::EventArgs^  e) {
-				 // Aparece una nueva ventana con el ganador
 				 
+				 // Aparece una nueva ventana con el ganador
 				 if (contador1 != contador2){
 					if(contador1 > contador2){
-						espacio_reglas->Text="¡¡¡ Ha ganado el jugador 1!!!";
+						espacio_reglas->Text="¡¡¡Ha ganado el jugador 1!!!";
 						espacio_reglas->Refresh();
 					}else{
-						espacio_reglas->Text="¡¡¡ Ha ganado el jugador 2!!!";
+						espacio_reglas->Text="¡¡¡Ha ganado el jugador 2!!!";
 						espacio_reglas->Refresh();
 					}
 					
@@ -387,8 +368,6 @@ namespace Sample {
 				 //Cerramos la aplicación sin errores.
 				 Application::Exit();
 		 }
-
-
 
 };
 }
